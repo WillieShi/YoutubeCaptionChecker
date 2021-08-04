@@ -1,7 +1,7 @@
 from youtube_transcript_api import YouTubeTranscriptApi
 
 # retrieve the available transcripts
-transcript_list = YouTubeTranscriptApi.list_transcripts('lIbjyFjiF5M')
+transcript_list = YouTubeTranscriptApi.list_transcripts('P1OWo43ddXo')
 
 # # iterate over all available transcripts
 # for transcript in transcript_list:

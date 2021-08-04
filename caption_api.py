@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-
-# Sample Python code for youtube.captions.list
-# See instructions for running these code samples locally:
-# https://developers.google.com/explorer-help/guides/code_samples#python
-
 import io
 import os
 
@@ -32,16 +26,14 @@ def api_setup():
     return youtube
 #pulls up video data for a given videoID
 def video_search(vid_id, youtube):
-    request = youtube.captions().list(
+    vid_data = youtube.captions().list(
         part="snippet",
-        #videoId="lIbjyFjiF5M"
         videoId = vid_id
-    )
-    vid_data = request.execute()
+    ).execute()
     return vid_data
 
 #The current cap_search only looks for the asr or auto generated captions for a given video
-def cap_search(vid_data, youtube):
+def cap_search(vid_data, transcript_file_name, youtube):
     #grab the auto generated caption track from the given video
     caption_id = ""
     for item in vid_data["items"]:
@@ -57,7 +49,7 @@ def cap_search(vid_data, youtube):
 
      # TODO: For this request to work, you must replace "YOUR_FILE"
     #       with the location where the downloaded content should be written.
-    fh = io.FileIO("CAPTION_TRANSCRIPT", "wb")
+    fh = io.FileIO(transcript_file_name, "wb")
 
     download = MediaIoBaseDownload(fh, request)
     complete = False
