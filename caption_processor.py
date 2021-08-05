@@ -7,7 +7,6 @@ def transcript_search(transcript_file_name, offending_words):
         #caption file is structured like l1: time_stamp, l2: text, l3: empty \n
         #go through file and search for offending_words
         line = file.readline()
-        print(line)
         while line:
                 if line != '\n':
                         timestamp = line
