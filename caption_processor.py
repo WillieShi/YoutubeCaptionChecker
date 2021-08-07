@@ -1,6 +1,8 @@
 import io
 import os
 
+from pyasn1.type.univ import Null
+
 def transcript_search(transcript_file_name, offending_words):
         file = open(transcript_file_name, 'r')
 
@@ -11,17 +13,19 @@ def transcript_search(transcript_file_name, offending_words):
                 if line != '\n':
                         timestamp = line
                         text = file.readline()
-                        if word_check(text, offending_words):
-                                print("time: " + timestamp + "line: " + text + "\n")
+                        word = word_check(text, offending_words)
+                        if word != "":
+                                print("time: " + timestamp + "line: " + text + "word: " + word + "\n")
                 line = file.readline()
+        file.close()
                         
 def word_check(line, offending_words):
         words = line.split()
         
         for word in words:
                 if word in offending_words:
-                        return True
-        return False
+                        return word
+        return ""
 
 
                         

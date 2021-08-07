@@ -24,6 +24,7 @@ def api_setup():
     youtube = googleapiclient.discovery.build(
         api_service_name, api_version, credentials=credentials)
     return youtube
+    
 #pulls up video data for a given videoID
 def video_search(vid_id, youtube):
     vid_data = youtube.captions().list(
@@ -47,8 +48,6 @@ def cap_search(vid_data, transcript_file_name, youtube):
         id = caption_id
     )
 
-     # TODO: For this request to work, you must replace "YOUR_FILE"
-    #       with the location where the downloaded content should be written.
     fh = io.FileIO(transcript_file_name, "wb")
 
     download = MediaIoBaseDownload(fh, request)
